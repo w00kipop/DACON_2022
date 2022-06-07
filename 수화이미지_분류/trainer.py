@@ -5,7 +5,7 @@ import torch
 import numpy as np
 
 
-class Trainer():
+class Trainer:
     def __init__(self, model, optimizer, crit, device):
         self.model = model
         self.optimizer = optimizer
