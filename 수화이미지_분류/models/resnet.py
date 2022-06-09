@@ -67,7 +67,7 @@ class BottleNeck(nn.Module):
 
 
 class ResNet(nn.Module):
-    def __init__(self, block, num_block, num_classes=11, init_weights=True):
+    def __init__(self, block, num_block, num_classes=11):
         super().__init__()
 
         self.in_channels = 64
@@ -84,9 +84,6 @@ class ResNet(nn.Module):
 
         self.avg_pool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc = nn.Linear(512 * block.expansion, num_classes)
-
-        if init_weights:
-            self._initialize_weights()
 
 
     def _make_layer(self, block, out_channels, num_blocks, stride):
