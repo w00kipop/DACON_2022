@@ -1,6 +1,6 @@
+import os
 import cv2
 import pandas as pd
-import os
 import torchvision.transforms as transforms
 
 from glob import glob
@@ -81,7 +81,7 @@ def get_transform(config, train=True):
     if train:
         train_transform = transforms.Compose([
             transforms.ToPILImage(), # Numpy list -> Image
-            transforms.Resize(config.img_size, config.img_size),
+            transforms.Resize([config.img_size, config.img_size]),
             transforms.ToTensor(),
             transforms.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5))
         ])
@@ -91,7 +91,7 @@ def get_transform(config, train=True):
     else:
         test_transform = transforms.Compose([
             transforms.ToPILImage(),
-            transforms.Resize(config.img_size, config.img_size),
+            transforms.Resize([config.img_size, config.img_size]),
             transforms.ToTensor(),
             transforms.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5))
         ])
