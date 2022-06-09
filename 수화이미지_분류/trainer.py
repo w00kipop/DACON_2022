@@ -1,8 +1,8 @@
-from copy import deepcopy
-
-import tqdm
 import torch
 import numpy as np
+
+from copy import deepcopy
+from tqdm.auto import tqdm
 
 
 class Trainer:
@@ -21,6 +21,7 @@ class Trainer:
         for epoch in range(1, config.epoch + 1):
             self.model.train()
             train_loss = 0.0
+            i = 0
 
             for img, label in tqdm(iter(train_loader)):
                 img, label = img.to(self.device), label.to(self.device)
@@ -34,8 +35,9 @@ class Trainer:
                 self.optimizer.zero_grad()
 
                 train_loss += loss.item()
+                i = i + 1
 
-            print('[%d] Train loss: %.4f' % (config.epoch, train_loss / len(train_loader)))
+            print('[%d]Epoch Train loss: %.4f' % (i, train_loss / len(train_loader)))
 
         return train_loss / len(train_loader)
 
@@ -69,8 +71,7 @@ class Trainer:
                 torch.save(self.model.state_dict(), './model_pth/resnet_best_acc.pth')
                 print(f'best_acc_model이 {i}번 바뀜')
 
-            print('[%d] Valid loss: %.4f, Accuracy: {}/{} (%.0f %)\n' % (config.epoch, valid_loss / len(valid_loader),
-            correct, len(valid_loader.dataset), 100 * correct / len(valid_loader.dataset)))
+            print('[%d] Valid loss: %.4f, Accuracy: {%d}/{%d} (%.2f)\n' % (config.epoch, valid_loss / len(valid_loader), correct, len(valid_loader.dataset), 100 * correct / len(valid_loader.dataset)))
 
         return valid_loss / len(valid_loader)
 
