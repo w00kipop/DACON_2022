@@ -1,4 +1,11 @@
+# pycharm, trashes
+/.idea
+.DS_Store
+
+
 # 수화이미지 분류
 /수화이미지_분류/data
 /수화이미지_분류/baseline.csv
-/수화이미지_분류/model
+/수화이미지_분류/model_pth
+/수화이미지_분류/__pycache__
+/수화이미지_분류/models/__pycache__
